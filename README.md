@@ -12,9 +12,10 @@ A minimal Tetris implementation written in C and Raylib.
     <td><img src="./media/cTetris_light.png" alt="Light Theme" width="100%"></td>
   </tr>
 </table>
-</div>
 
----
+<video src="https://github.com/user-attachments/assets/9b0f91ce-74fc-4242-97a2-b1c173736a4b" controls></video>
+
+</div>
 
 ## Game Mechanics
 
@@ -109,47 +110,36 @@ Download the zip for Windows from the [Releases](https://github.com/tmpstpdwn/cT
 
 ---
 
-## Building from Source
+## Building from source
 
-### Prerequisites
-
-- **GNU Make**
-- **GCC** (Native Linux builds)
-- **X11 development files** (Native Linux builds)
-- **mingw-w64 toolchain** (Cross-compiling Windows builds)
+### Prerequisites:
+- C compiler
+- Meson
+- Ninja
+- CMake: To compile Raylib.
+- Emscripten SDK: For WebAssembly.
 
 ### Linux
 
-**Build**
-
 ```bash
-make linux
+git clone --recursive https://github.com/tmpstpdwn/cTetris
+cd cTetris
+meson setup build
+meson compile -C build
 ```
 
-**Install**
+The executable will be generated inside the build directory.
+
+### WebAssembly (From Linux)
 
 ```bash
-mkdir -p ~/.local/bin ~/.local/share/icons/hicolor/scalable/apps ~/.local/share/applications
-cp cTetris ~/.local/bin/
-cp cTetris.svg ~/.local/share/icons/hicolor/scalable/apps/
-cp cTetris.desktop ~/.local/share/applications/
+git clone --recursive https://github.com/tmpstpdwn/cTetris
+cd cTetris
+meson setup build-wasm --cross-file cross/emscripten.ini
+meson compile -C build-wasm
 ```
 
-**Uninstall**
-
-```bash
-rm -f ~/.local/bin/cTetris
-rm -f ~/.local/share/icons/hicolor/scalable/apps/cTetris.svg
-rm -f ~/.local/share/applications/cTetris.desktop
-```
-
-**Note:** Ensure `~/.local/bin` is in your `PATH`.
-
-### Windows (cross-compile from Linux)
-
-```bash
-make windows
-```
+`cTetris.wasm` and the binding `cTetris.js` will be generated inside the `build-wasm` directory.
 
 ---
 
