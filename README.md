@@ -2,14 +2,14 @@
 
 # cTetris (v1.0.1)
 
-<img src="./cTetris_512x512.png" alt="cTetris Icon" width="256" height="256">
+<img src="./media/cTetris_512x512.png" alt="cTetris Icon" width="256" height="256">
 
 A minimal Tetris implementation written in C and Raylib.
 
 <table align="center">
   <tr>
-    <td><img src="cTetris_dark.png" alt="Dark Theme" width="100%"></td>
-    <td><img src="cTetris_light.png" alt="Light Theme" width="100%"></td>
+    <td><img src="./media/cTetris_dark.png" alt="Dark Theme" width="100%"></td>
+    <td><img src="./media/cTetris_light.png" alt="Light Theme" width="100%"></td>
   </tr>
 </table>
 </div>
