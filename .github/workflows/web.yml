@@ -52,6 +52,7 @@ jobs:
         run: |
           cp build-wasm/cTetris.js platform/web/
           cp build-wasm/cTetris.wasm platform/web/
+          cp media/cTetris.svg platform/web/
 
       - uses: actions/configure-pages@v5
 

@@ -19,6 +19,10 @@ cmake = import('cmake')
 
 raylib_options = cmake.subproject_options()
 
+raylib_options.add_cmake_defines({
+  'BUILD_EXAMPLES': 'OFF',
+})
+
 if system == 'linux'
   raylib_options.add_cmake_defines({
     'GLFW_BUILD_WAYLAND': 'ON',
