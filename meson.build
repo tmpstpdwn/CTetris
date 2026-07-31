@@ -7,10 +7,26 @@ project(
   ]
 )
 
-if meson.get_compiler('c').get_id() == 'emscripten'
+cc = meson.get_compiler('c')
+
+if cc.get_id() == 'emscripten'
   add_project_arguments('-std=gnu99', language: 'c')
 else
   add_project_arguments('-std=c99', language: 'c')
+endif
+
+if get_option('sanitize')
+  add_project_arguments(
+    '-fsanitize=address,undefined',
+    '-fno-omit-frame-pointer',
+    '-g',
+    language: 'c'
+  )
+
+  add_project_link_arguments(
+    '-fsanitize=address,undefined',
+    language: 'c'
+  )
 endif
 
 cmake = import('cmake')
@@ -21,7 +37,13 @@ raylib_options.add_cmake_defines({
   'BUILD_EXAMPLES': 'OFF',
 })
 
-if meson.get_compiler('c').get_id() == 'emscripten'
+if host_machine.system() == 'linux'
+  raylib_options.add_cmake_defines({
+    'GLFW_BUILD_WAYLAND': 'ON',
+  })
+endif
+
+if cc.get_id() == 'emscripten'
   raylib_options.add_cmake_defines({
     'PLATFORM': 'Web',
   })
@@ -42,9 +64,22 @@ sources = files(
   'src/ctetris.c',
 )
 
+if host_machine.system() == 'windows'
+  sources += files('platform/windows/resource.rc')
+endif
+
+win_subsystem = 'console'
+
+if host_machine.system() == 'windows'
+  if get_option('buildtype') == 'release'
+    win_subsystem = 'windows'
+  endif
+endif
+
 executable(
   'cTetris',
   sources,
   include_directories: include_directories('include'),
-  dependencies: raylib
+  dependencies: raylib,
+  win_subsystem: win_subsystem,
 )

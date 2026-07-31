@@ -1,4 +1,4 @@
-IDI_ICON ICON "cTetris.ico"
+IDI_ICON ICON "../../media/cTetris.ico"
 1 VERSIONINFO
 FILEVERSION     1,0,1,0
 PRODUCTVERSION  1,0,1,0

@@ -50,14 +50,14 @@ jobs:
 
       - name: Copy build stuff
         run: |
-          cp build-wasm/cTetris.js web/
-          cp build-wasm/cTetris.wasm web/
+          cp build-wasm/cTetris.js platform/web/
+          cp build-wasm/cTetris.wasm platform/web/
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: web
+          path: platform/web
 
       - id: deployment
         uses: actions/deploy-pages@v5
