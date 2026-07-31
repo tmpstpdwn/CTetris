@@ -36,14 +36,8 @@ jobs:
           sudo apt-get install -y cmake ninja-build python3-pip
           python3 -m pip install meson
 
-      - name: Check tools
-        run: |
-          which cmake
-          which emcc
-          echo $PATH
-
       - name: Configure
-        run: meson setup build-wasm --cross-file cross/emscripten.ini
+        run: meson setup build-wasm --buildtype=release --cross-file cross/emscripten.ini
 
       - name: Build
         run: meson compile -C build-wasm
