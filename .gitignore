@@ -1,2 +1,4 @@
 ./build
 ./build-wasm
+./web/cTetris.js
+./web/cTetris.wasm

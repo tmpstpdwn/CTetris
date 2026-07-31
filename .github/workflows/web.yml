@@ -3,7 +3,6 @@ name: Deploy web content to Pages
 on:
   push:
     branches: ["main"]
-
   workflow_dispatch:
 
 permissions:
@@ -12,29 +11,48 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/checkout@v4
         with:
-          path: './web'
+          submodules: recursive
 
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - name: Install Emscripten
+        uses: mymindstorm/setup-emsdk@v14
+
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build python3-pip
+          python3 -m pip install meson
+
+
+      - name: Configure
+        run: meson setup build-wasm --cross-file cross/emscripten.ini
+
+      - name: Build
+        run: meson compile -C build-wasm
+
+      - name: Copy build stuff
+        run: |
+          cp build-wasm/cTetris.js web/
+          cp build-wasm/cTetris.wasm web/
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+
+      - id: deployment
         uses: actions/deploy-pages@v5
