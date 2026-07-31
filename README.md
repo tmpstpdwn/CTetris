@@ -19,7 +19,7 @@ A minimal Tetris implementation written in C and Raylib.
 
 ## Game Mechanics
 
-- The grid is 20×10.
+- The grid is 20×10 (rows×cols).
 - A shape spawns at the top and drops down at an interval determined by the level. Higher levels increase the drop speed, progressively raising difficulty.
 - A shape can be moved left/right with input delay, rotated left or right with wall/floor kick collision, soft-dropped for accelerated falling, or hard-dropped for instant locking to where the shape was supposed to fall.
 - Once the active shape lands on the grid floor or another shape (when not hard-dropped), a lock timer of 0.5 seconds runs before the piece auto-locks. Further moves resets the lock timer or the drop timer (pause dropping mechanism) depending on whether the shape is grounded or airborne.
@@ -61,13 +61,13 @@ A minimal Tetris implementation written in C and Raylib.
 
 **Level**: Determined by lines cleared. `Level = (lines / 10) + 1`.
 
-**Combo**: Maintained by clearing lines without breaking the chain. Combo bonus adds on top of line-clear bonus.
+**Combo**: Maintained by clearing lines without breaking the chain. Combo bonus adds on top of the line clear bonus.
 
 ---
 
 ## Platform Support
 
-cTetris has been tested and verified to work on:
+`cTetris` has been tested and verified to work on:
 
 - **Linux** (X11 and Wayland).
 - **Windows**: 10 and later.
@@ -112,34 +112,36 @@ Download the zip for Windows from the [Releases](https://github.com/tmpstpdwn/cT
 
 ## Building from source
 
-### Prerequisites:
+### Prerequisites
+
 - C compiler
 - Meson
 - Ninja
-- CMake: To compile Raylib.
-- Emscripten SDK: For WebAssembly.
+- CMake (used to build Raylib)
+- Emscripten SDK (only required for the WebAssembly build)
 
-### Linux
+### Native builds
 
-```bash
+```c
 git clone --recursive https://github.com/tmpstpdwn/cTetris
 cd cTetris
-meson setup build
+meson setup build --buildtype=release
 meson compile -C build
 ```
 
-The executable will be generated inside the build directory.
+The compiled executable will be generated inside the `build` directory.
 
-### WebAssembly (From Linux)
+### WebAssembly build
 
-```bash
+```c
 git clone --recursive https://github.com/tmpstpdwn/cTetris
 cd cTetris
-meson setup build-wasm --cross-file cross/emscripten.ini
+meson setup build-wasm --buildtype=release --cross-file cross/emscripten.ini
 meson compile -C build-wasm
 ```
 
-`cTetris.wasm` and the binding `cTetris.js` will be generated inside the `build-wasm` directory.
+The generated files (`cTetris.wasm` and `cTetris.js`) will be available inside the `build-wasm` directory.
+Other files required to serve `cTetris` on the web can be found [here](platform/web).
 
 ---
 
