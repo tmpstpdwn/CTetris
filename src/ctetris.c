@@ -86,7 +86,8 @@ static uint8_t curr_shape_land_moves;
 
 // Engine game stats.
 static uint32_t score;
-static uint8_t combo, level, lines;
+static uint8_t level, combo;
+static uint16_t lines;
 
 // Input buffer on which the `ctetris_update` fn will act on.
 // Set on `ctetris_input_push` fn.

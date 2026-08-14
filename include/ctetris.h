@@ -188,7 +188,8 @@ struct CTetrisEvent {
     // CTETRIS_EVENT_(HARD_DROP, SOFT_DROP) only sets score.
     // CTETRIS_EVENT_LINE_CLEAR sets score, lines, level, combo.
     uint32_t score;
-    uint8_t lines, level, combo;
+    uint8_t level, combo;
+    uint16_t lines;
     // CTETRIS_EVENT_LINE_CLEAR.
     // Stores indices of lines cleared [0 - ROWS).
     uint8_t lines_cleared_indices[4]; // At max only 4 lines can be cleared.

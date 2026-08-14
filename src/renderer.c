@@ -352,7 +352,8 @@ static bool line_move_pending = false;
 
 // Game stats.
 static uint32_t score, high_score;
-static uint8_t lines, level;
+static uint8_t level;
+static uint16_t lines;
 
 // Game state stuff.
 static bool paused = false;
