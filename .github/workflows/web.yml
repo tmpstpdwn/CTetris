@@ -42,17 +42,18 @@ jobs:
       - name: Build
         run: meson compile -C build-wasm
 
-      - name: Copy build stuff
+      - name: Prepare Pages site
         run: |
-          cp build-wasm/cTetris.js platform/web/
-          cp build-wasm/cTetris.wasm platform/web/
-          cp media/cTetris.svg platform/web/
+          rm -rf pages
+          mkdir -p pages
+          cp -rL platform/web/. pages/
+          cp media/cTetris.svg pages/
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: platform/web
+          path: pages
 
       - id: deployment
         uses: actions/deploy-pages@v5
