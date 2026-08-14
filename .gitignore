@@ -1,5 +1,2 @@
-./cache
-./build
-./build-wasm
-.platform/web/cTetris.js
-.platform/web/cTetris.wasm
+.cache/
+build*/
