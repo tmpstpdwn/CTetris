@@ -42,9 +42,9 @@ A minimal Tetris implementation written in C and Raylib.
 | `Z`       | Rotate right          |
 | `DOWN`    | Soft drop             |
 | `SPACE`   | Hard drop             |
-| `P`       | Toggle Pause / Resume |
+| `P`       | Toggle Pause-Resume |
 | `R`       | Restart               |
-| `M`       | Toggle mute / Unmute  |
+| `M`       | Toggle Mute-Unmute  |
 | `T`       | Toggle theme          |
 
 ### Scoring
@@ -74,7 +74,7 @@ A minimal Tetris implementation written in C and Raylib.
 
 ### Known issues
 
-- **Wayland (DPI scaling)**: On Wayland compositors that doesn't report DPI scale factor information to raylib, the window may not scale properly.
+- **Wayland (DPI scaling)**: On Wayland compositors that doesn't report DPI scale factor information to Raylib, the window may not scale properly.
 
 ---
 
@@ -117,12 +117,13 @@ Download the zip for Windows from the [Releases](https://github.com/tmpstpdwn/cT
 - C compiler
 - Meson
 - Ninja
-- CMake (used to build Raylib)
-- Emscripten SDK (only required for the WebAssembly build)
+- CMake : used to build Raylib.
+          See Raylib [wiki](https://github.com/raysan5/raylib/wiki) for Raylib build dependencies.
+- Emscripten SDK : only required for the WebAssembly build.
 
 ### Native builds
 
-```c
+```bash
 git clone --recursive https://github.com/tmpstpdwn/cTetris
 cd cTetris
 meson setup build --buildtype=release
@@ -133,7 +134,7 @@ The compiled executable will be generated inside the `build` directory.
 
 ### WebAssembly build
 
-```c
+```bash
 git clone --recursive https://github.com/tmpstpdwn/cTetris
 cd cTetris
 meson setup build-wasm --buildtype=release --cross-file cross/emscripten.ini
