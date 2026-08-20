@@ -10,7 +10,7 @@
 /* [ VARIABLES ] */
 
 // The png icon used is 512x512 and was made by me with inkscape.
-// Font: SauceCodePro-Regular.otf
+// Font: SourceCodePro-Regular.otf
 // SFX_* are .wav files made by me or sourced from the internet.
 
 const uint32_t ICON_PNG_LEN = 31092;
